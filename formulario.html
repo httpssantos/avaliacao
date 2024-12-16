@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação do Serviço</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #333;
+        }
+        .qr-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .rating {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+        .rating input[type="radio"] {
+            display: none;
+        }
+        .rating label {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .qr-container h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Melhorias de responsividade */
+        @media screen and (max-width: 600px) {
+            .form-group {
+                margin-bottom: 15px;
+            }
+            label {
+                font-size: 14px;
+            }
+            input[type="text"], input[type="date"], select, textarea {
+                font-size: 14px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            .rating label {
+                font-size: 20px;
+            }
+            .rating {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .form-group input[type="text"], .form-group input[type="date"], .form-group select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Avaliação do Serviço</h1>
+
+    <!-- QR Code -->
+    <div class="qr-container">
+        <h3>Escaneie o QR Code para acessar o formulário novamente:</h3>
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        // Gerar o QR Code que redireciona para esta mesma página
+        const url = window.location.href; // Captura o link atual da página
+        QRCode.toCanvas(document.getElementById('qrcode'), url, function (error) {
+            if (error) console.error(error);
+            console.log('QR Code gerado!');
+        });
+    </script>
+
+    <div class="form-container">
+        <form action="submit_form.php" method="POST">
+            <!-- Perguntas principais -->
+            <div class="form-group">
+                <label for="nome">Nome do Cliente:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF do Cliente:</label>
+                <input type="text" id="cpf" name="cpf" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data_instalacao">Data da Instalação:</label>
+                <input type="date" id="data_instalacao" name="data_instalacao" required>
+            </div>
+
+            <!-- Avaliação do Técnico -->
+            <div class="form-group">
+                <label>Profissionalismo:</label>
+                <div class="rating">
+                    <input type="radio" id="rating1_1" name="profissionalismo" value="1">
+                    <label for="rating1_1">★</label>
+                    <input type="radio" id="rating1_2" name="profissionalismo" value="2">
+                    <label for="rating1_2">★</label>
+                    <input type="radio" id="rating1_3" name="profissionalismo" value="3">
+                    <label for="rating1_3">★</label>
+                    <input type="radio" id="rating1_4" name="profissionalismo" value="4">
+                    <label for="rating1_4">★</label>
+                    <input type="radio" id="rating1_5" name="profissionalismo" value="5">
+                    <label for="rating1_5">★</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Qualidade da instalação:</label>
+                <div class="rating">
+                    <input type="radio" id="rating2_1" name="qualidade_instalacao" value="1">
+                    <label for="rating2_1">★</label>
+                    <input type="radio" id="rating2_2" name="qualidade_instalacao" value="2">
+                    <label for="rating2_2">★</label>
+                    <input type="radio" id="rating2_3" name="qualidade_instalacao" value="3">
+                    <label for="rating2_3">★</label>
+                    <input type="radio" id="rating2_4" name="qualidade_instalacao" value="4">
+                    <label for="rating2_4">★</label>
+                    <input type="radio" id="rating2_5" name="qualidade_instalacao" value="5">
+                    <label for="rating2_5">★</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Limpeza do local:</label>
+                <div class="rating">
+                    <input type="radio" id="rating3_1" name="limpeza_local" value="1">
+                    <label for="rating3_1">★</label>
+                    <input type="radio" id="rating3_2" name="limpeza_local" value="2">
+                    <label for="rating3_2">★</label>
+                    <input type="radio" id="rating3_3" name="limpeza_local" value="3">
+                    <label for="rating3_3">★</label>
+                    <input type="radio" id="rating3_4" name="limpeza_local" value="4">
+                    <label for="rating3_4">★</label>
+                    <input type="radio" id="rating3_5" name="limpeza_local" value="5">
+                    <label for="rating3_5">★</label>
+                </div>
+            </div>
+
+            <!-- Perguntas adicionais -->
+            <div class="form-group">
+                <label for="recomendaria">Você recomendaria o serviço para um amigo?</label>
+                <select id="recomendaria" name="recomendaria" required>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="explicacao">O técnico explicou claramente o serviço realizado?</label>
+                <select id="explicacao" name="explicacao" required>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="seguranca">Você se sentiu seguro e confortável durante a visita do técnico?</label>
+                <select id="seguranca" name="seguranca" required>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+
+            <!-- Comentários -->
+            <div class="form-group">
+                <label for="comentarios">Comentários adicionais:</label>
+                <textarea id="comentarios" name="comentarios"></textarea>
+            </div>
+
+            <button type="submit">Enviar Avaliação</button>
+        </form>
+    </div>
+
+</body>
+</html>
