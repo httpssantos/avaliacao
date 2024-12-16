@@ -54,8 +54,19 @@
             display: none;
         }
         .rating label {
-            font-size: 24px;
+            font-size: 30px;
             cursor: pointer;
+            color: #ccc;
+        }
+        .rating input[type="radio"]:checked ~ label {
+            color: #f39c12;
+        }
+        .rating input[type="radio"]:hover ~ label {
+            color: #f39c12;
+        }
+        .rating label:hover,
+        .rating input[type="radio"]:checked + label {
+            color: #f39c12;
         }
         textarea {
             height: 100px;
@@ -95,7 +106,7 @@
                 padding: 10px 15px;
             }
             .rating label {
-                font-size: 20px;
+                font-size: 24px;
             }
             .rating {
                 flex-wrap: wrap;
